@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --background: 36 26% 97%; /* #FAEBD7 - antique white */
+  --foreground: 25 50% 11%; /* #2F1B14 - dark brown */
+  --muted: 39 23% 93%; /* #F5F5DC - vintage beige */
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 25 50% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 25 50% 11%;
+  --border: 25 18% 80%;
+  --input: 25 18% 80%;
+  --primary: 43 74% 49%; /* #DAA520 - goldenrod */
+  --primary-foreground: 25 50% 11%;
+  --secondary: 39 23% 93%;
+  --secondary-foreground: 25 50% 11%;
+  --accent: 39 23% 93%;
+  --accent-foreground: 25 50% 11%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 25 50% 11%;
+  --radius: 0.5rem;
+  
+  /* Custom vintage colors */
+  --vintage-brown: 25 69% 27%; /* #8B4513 */
+  --chocolate: 16 72% 47%; /* #D2691E */
+  --goldenrod: 43 74% 49%; /* #DAA520 */
+  --dark-goldenrod: 43 74% 39%; /* #B8860B */
+  --antique-white: 36 26% 97%; /* #FAEBD7 */
+  --vintage-beige: 39 23% 93%; /* #F5F5DC */
+  --dark-brown: 25 50% 11%; /* #2F1B14 */
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 43 74% 49%;
+  --primary-foreground: 25 50% 11%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: hsl(var(--antique-white));
+    color: hsl(var(--dark-brown));
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer utilities {
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .text-vintage-brown {
+    color: hsl(var(--vintage-brown));
+  }
+  
+  .text-chocolate {
+    color: hsl(var(--chocolate));
+  }
+  
+  .text-goldenrod {
+    color: hsl(var(--goldenrod));
+  }
+  
+  .text-dark-goldenrod {
+    color: hsl(var(--dark-goldenrod));
+  }
+  
+  .text-antique-white {
+    color: hsl(var(--antique-white));
+  }
+  
+  .text-vintage-beige {
+    color: hsl(var(--vintage-beige));
+  }
+  
+  .text-dark-brown {
+    color: hsl(var(--dark-brown));
+  }
+  
+  .bg-vintage-brown {
+    background-color: hsl(var(--vintage-brown));
+  }
+  
+  .bg-chocolate {
+    background-color: hsl(var(--chocolate));
+  }
+  
+  .bg-goldenrod {
+    background-color: hsl(var(--goldenrod));
+  }
+  
+  .bg-dark-goldenrod {
+    background-color: hsl(var(--dark-goldenrod));
+  }
+  
+  .bg-antique-white {
+    background-color: hsl(var(--antique-white));
+  }
+  
+  .bg-vintage-beige {
+    background-color: hsl(var(--vintage-beige));
+  }
+  
+  .bg-dark-brown {
+    background-color: hsl(var(--dark-brown));
+  }
+  
+  .border-chocolate {
+    border-color: hsl(var(--chocolate));
+  }
+  
+  .border-goldenrod {
+    border-color: hsl(var(--goldenrod));
+  }
+  
+  .hover\:bg-dark-goldenrod:hover {
+    background-color: hsl(var(--dark-goldenrod));
+  }
+  
+  .hover\:text-goldenrod:hover {
+    color: hsl(var(--goldenrod));
+  }
+}
