@@ -13,44 +13,44 @@ export default function Home() {
         {/* Featured Categories */}
         <section className="py-16 bg-vintage-beige">
           <div className="max-w-7xl mx-auto px-4">
-            <h3 className="text-4xl font-playfair font-bold text-center text-dark-brown mb-12">Featured Categories</h3>
+            <h3 className="text-4xl font-playfair font-bold text-center text-dark-brown mb-12">Популярные Категории</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="bg-white rounded-lg shadow-warm overflow-hidden hover:shadow-warm-lg transition-all">
                 <img 
                   src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" 
-                  alt="Antique Furniture" 
+                  alt="Антикварная мебель" 
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
-                  <h4 className="text-xl font-playfair font-semibold text-dark-brown mb-2">Furniture</h4>
-                  <p className="text-gray-600 mb-4">Restored chairs, tables, and cabinets from bygone eras</p>
-                  <span className="text-chocolate font-semibold">View Collection</span>
+                  <h4 className="text-xl font-playfair font-semibold text-dark-brown mb-2">Мебель</h4>
+                  <p className="text-gray-600 mb-4">Отреставрированные стулья, столы и шкафы прошлых эпох</p>
+                  <span className="text-warm-gold font-semibold">Смотреть коллекцию</span>
                 </div>
               </div>
               
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="bg-white rounded-lg shadow-warm overflow-hidden hover:shadow-warm-lg transition-all">
                 <img 
                   src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" 
-                  alt="Vintage Decor" 
+                  alt="Винтажный декор" 
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
-                  <h4 className="text-xl font-playfair font-semibold text-dark-brown mb-2">Decorative Items</h4>
-                  <p className="text-gray-600 mb-4">Unique ornaments and decorative pieces</p>
-                  <span className="text-chocolate font-semibold">View Collection</span>
+                  <h4 className="text-xl font-playfair font-semibold text-dark-brown mb-2">Декоративные предметы</h4>
+                  <p className="text-gray-600 mb-4">Уникальные украшения и декоративные элементы</p>
+                  <span className="text-warm-gold font-semibold">Смотреть коллекцию</span>
                 </div>
               </div>
               
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="bg-white rounded-lg shadow-warm overflow-hidden hover:shadow-warm-lg transition-all">
                 <img 
                   src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" 
-                  alt="Vintage Jewelry" 
+                  alt="Винтажные украшения" 
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
-                  <h4 className="text-xl font-playfair font-semibold text-dark-brown mb-2">Jewelry & Accessories</h4>
-                  <p className="text-gray-600 mb-4">Timeless pieces that tell unique stories</p>
-                  <span className="text-chocolate font-semibold">View Collection</span>
+                  <h4 className="text-xl font-playfair font-semibold text-dark-brown mb-2">Украшения и аксессуары</h4>
+                  <p className="text-gray-600 mb-4">Вневременные изделия с уникальной историей</p>
+                  <span className="text-warm-gold font-semibold">Смотреть коллекцию</span>
                 </div>
               </div>
             </div>

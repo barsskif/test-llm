@@ -6,7 +6,7 @@ import { z } from "zod";
 
 const createOrderWithItemsSchema = z.object({
   order: insertOrderSchema,
-  items: z.array(insertOrderItemSchema.omit({ orderId: true, id: true })),
+  items: z.array(insertOrderItemSchema),
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {

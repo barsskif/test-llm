@@ -43,7 +43,7 @@ export function ProductGrid() {
   }, [products, searchTerm, sortBy, categoryFilter]);
 
   const categories = useMemo(() => {
-    const uniqueCategories = [...new Set(products.map(p => p.category))];
+    const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
     return uniqueCategories.sort();
   }, [products]);
 
@@ -71,15 +71,15 @@ export function ProductGrid() {
     <section id="catalog" className="py-16 bg-antique-white">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-4">
-          <h3 className="text-4xl font-playfair font-bold text-dark-brown">Our Collection</h3>
+          <h3 className="text-4xl font-playfair font-bold text-dark-brown">Наша Коллекция</h3>
           
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full lg:w-auto">
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="border-chocolate w-full sm:w-48">
-                <SelectValue placeholder="All Categories" />
+              <SelectTrigger className="border-warm-gold w-full sm:w-48">
+                <SelectValue placeholder="Все категории" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
+                <SelectItem value="all">Все категории</SelectItem>
                 {categories.map(category => (
                   <SelectItem key={category} value={category}>{category}</SelectItem>
                 ))}
@@ -87,33 +87,33 @@ export function ProductGrid() {
             </Select>
             
             <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="border-chocolate w-full sm:w-48">
-                <SelectValue placeholder="Sort by" />
+              <SelectTrigger className="border-warm-gold w-full sm:w-48">
+                <SelectValue placeholder="Сортировка" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="name">Sort by Name</SelectItem>
-                <SelectItem value="price-low">Price: Low to High</SelectItem>
-                <SelectItem value="price-high">Price: High to Low</SelectItem>
-                <SelectItem value="category">Sort by Category</SelectItem>
+                <SelectItem value="name">По названию</SelectItem>
+                <SelectItem value="price-low">Цена: По возрастанию</SelectItem>
+                <SelectItem value="price-high">Цена: По убыванию</SelectItem>
+                <SelectItem value="category">По категории</SelectItem>
               </SelectContent>
             </Select>
             
             <div className="relative w-full sm:w-64">
               <Input
                 type="text"
-                placeholder="Search items..."
+                placeholder="Поиск товаров..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="border-chocolate pr-10"
+                className="border-warm-gold pr-10"
               />
-              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-chocolate w-4 h-4" />
+              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-warm-gold w-4 h-4" />
             </div>
           </div>
         </div>
 
         {filteredAndSortedProducts.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-600 text-lg">No products found matching your criteria.</p>
+            <p className="text-gray-600 text-lg">Товары по вашим критериям не найдены.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
