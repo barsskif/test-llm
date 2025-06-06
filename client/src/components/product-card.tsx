@@ -44,13 +44,13 @@ export function ProductCard({ product }: ProductCardProps) {
           <Button 
             onClick={handleAddToCart}
             disabled={isAdding}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
               isAdding 
                 ? 'bg-green-500 hover:bg-green-500 text-white' 
-                : 'bg-goldenrod hover:bg-dark-goldenrod text-dark-brown'
+                : 'bg-warm-gold hover:bg-deep-gold text-dark-brown shadow-warm hover:shadow-warm-lg'
             }`}
           >
-            {isAdding ? 'Added!' : 'Add to Cart'}
+            {isAdding ? 'Добавлено!' : 'В корзину'}
           </Button>
         </div>
       </CardContent>

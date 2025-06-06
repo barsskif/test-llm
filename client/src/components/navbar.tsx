@@ -20,34 +20,34 @@ export function Navbar() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link href="/">
-                <h1 className="text-2xl font-playfair font-bold text-goldenrod cursor-pointer">
-                  Heritage Treasures
+                <h1 className="text-2xl font-playfair font-bold text-warm-gold cursor-pointer">
+                  Наследие Сокровищ
                 </h1>
               </Link>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/">
-                <a className={`hover:text-goldenrod transition-colors ${location === '/' ? 'text-goldenrod' : ''}`}>
-                  Catalog
+                <a className={`hover:text-warm-gold transition-colors ${location === '/' ? 'text-warm-gold' : ''}`}>
+                  Каталог
                 </a>
               </Link>
-              <a href="#about" className="hover:text-goldenrod transition-colors">About</a>
-              <a href="#contact" className="hover:text-goldenrod transition-colors">Contact</a>
+              <a href="#about" className="hover:text-warm-gold transition-colors">О нас</a>
+              <a href="#contact" className="hover:text-warm-gold transition-colors">Контакты</a>
               <Link href="/admin">
-                <Button variant="ghost" className="hover:text-goldenrod transition-colors text-antique-white">
+                <Button variant="ghost" className="hover:text-warm-gold transition-colors text-antique-white">
                   <Settings className="w-4 h-4 mr-1" />
-                  Admin
+                  Админ
                 </Button>
               </Link>
               <Button
                 variant="ghost"
                 onClick={() => setIsCartOpen(true)}
-                className="relative hover:text-goldenrod transition-colors text-antique-white"
+                className="relative hover:text-warm-gold transition-colors text-antique-white"
               >
                 <ShoppingCart className="w-5 h-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-goldenrod text-dark-brown rounded-full w-5 h-5 text-xs flex items-center justify-center font-semibold">
+                  <span className="absolute -top-2 -right-2 bg-warm-gold text-dark-brown rounded-full w-5 h-5 text-xs flex items-center justify-center font-semibold">
                     {totalItems}
                   </span>
                 )}
@@ -69,20 +69,20 @@ export function Navbar() {
             <div className="md:hidden pb-4">
               <div className="flex flex-col space-y-2">
                 <Link href="/">
-                  <a className="block py-2 hover:text-goldenrod transition-colors">Catalog</a>
+                  <a className="block py-2 hover:text-warm-gold transition-colors">Каталог</a>
                 </Link>
-                <a href="#about" className="block py-2 hover:text-goldenrod transition-colors">About</a>
-                <a href="#contact" className="block py-2 hover:text-goldenrod transition-colors">Contact</a>
+                <a href="#about" className="block py-2 hover:text-warm-gold transition-colors">О нас</a>
+                <a href="#contact" className="block py-2 hover:text-warm-gold transition-colors">Контакты</a>
                 <Link href="/admin">
-                  <a className="block py-2 hover:text-goldenrod transition-colors">Admin</a>
+                  <a className="block py-2 hover:text-warm-gold transition-colors">Админ</a>
                 </Link>
                 <Button
                   variant="ghost"
                   onClick={() => setIsCartOpen(true)}
-                  className="flex items-center justify-start p-2 hover:text-goldenrod transition-colors text-antique-white"
+                  className="flex items-center justify-start p-2 hover:text-warm-gold transition-colors text-antique-white"
                 >
                   <ShoppingCart className="w-5 h-5 mr-2" />
-                  Cart ({totalItems})
+                  Корзина ({totalItems})
                 </Button>
               </div>
             </div>

@@ -13,13 +13,13 @@ export function Hero() {
       <div className="absolute inset-0 bg-black bg-opacity-40"></div>
       <div className="relative max-w-7xl mx-auto px-4 h-full flex items-center">
         <div className="text-center text-white w-full">
-          <h2 className="text-5xl md:text-6xl font-playfair font-bold mb-4">Timeless Elegance</h2>
-          <p className="text-xl md:text-2xl mb-8 font-light">Restored antiques with stories to tell</p>
+          <h2 className="text-5xl md:text-6xl font-playfair font-bold mb-4">Вечная Элегантность</h2>
+          <p className="text-xl md:text-2xl mb-8 font-light">Отреставрированный антиквариат с историей</p>
           <Button 
             onClick={scrollToCatalog}
-            className="bg-goldenrod hover:bg-dark-goldenrod text-dark-brown px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+            className="bg-warm-gold hover:bg-deep-gold text-dark-brown px-8 py-3 rounded-lg font-semibold transition-all shadow-warm hover:shadow-warm-lg"
           >
-            Explore Collection
+            Изучить Коллекцию
           </Button>
         </div>
       </div>

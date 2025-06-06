@@ -61,56 +61,56 @@ export class MemStorage implements IStorage {
   private initializeProducts() {
     const sampleProducts: InsertProduct[] = [
       {
-        name: "Victorian Armchair",
-        description: "Restored 1890s mahogany armchair with original velvet upholstery",
-        price: 125000, // $1,250.00
-        category: "Furniture",
-        condition: "Fully Restored",
+        name: "Викторианское кресло",
+        description: "Отреставрированное кресло из красного дерева 1890-х годов с оригинальной бархатной обивкой",
+        price: 12500000, // 125,000 ₽
+        category: "Мебель",
+        condition: "Полностью отреставрировано",
         imageUrl: "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
         isActive: true
       },
       {
-        name: "Brass Chandelier",
-        description: "Ornate 1920s brass chandelier with crystal accents",
-        price: 85000, // $850.00
-        category: "Decorative Items",
-        condition: "Fully Restored",
+        name: "Латунная люстра",
+        description: "Роскошная латунная люстра 1920-х годов с хрустальными элементами",
+        price: 8500000, // 85,000 ₽
+        category: "Декоративные предметы",
+        condition: "Полностью отреставрировано",
         imageUrl: "https://images.unsplash.com/photo-1540932239986-30128078f3c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
         isActive: true
       },
       {
-        name: "Mahogany Chest",
-        description: "1930s chest of drawers with brass hardware",
-        price: 68000, // $680.00
-        category: "Furniture",
-        condition: "Fully Restored",
+        name: "Комод из красного дерева",
+        description: "Комод 1930-х годов с латунной фурнитурой",
+        price: 6800000, // 68,000 ₽
+        category: "Мебель",
+        condition: "Полностью отреставрировано",
         imageUrl: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
         isActive: true
       },
       {
-        name: "Porcelain Vase",
-        description: "Hand-painted porcelain vase from the 1880s",
-        price: 42000, // $420.00
-        category: "Decorative Items",
-        condition: "Original Condition",
+        name: "Фарфоровая ваза",
+        description: "Расписная фарфоровая ваза 1880-х годов ручной работы",
+        price: 4200000, // 42,000 ₽
+        category: "Декоративные предметы",
+        condition: "Оригинальное состояние",
         imageUrl: "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
         isActive: true
       },
       {
-        name: "Leather Book Set",
-        description: "Collection of 12 leather-bound classics from 1900s",
-        price: 29000, // $290.00
-        category: "Books & Documents",
-        condition: "Partially Restored",
+        name: "Коллекция кожаных книг",
+        description: "Набор из 12 классических книг в кожаном переплете начала 1900-х",
+        price: 2900000, // 29,000 ₽
+        category: "Книги и документы",
+        condition: "Частично отреставрировано",
         imageUrl: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
         isActive: true
       },
       {
-        name: "Gilded Mirror",
-        description: "Ornate French mirror with gold leaf frame, circa 1910",
-        price: 97500, // $975.00
-        category: "Decorative Items",
-        condition: "Fully Restored",
+        name: "Позолоченное зеркало",
+        description: "Роскошное французское зеркало с позолоченной рамой, около 1910 года",
+        price: 9750000, // 97,500 ₽
+        category: "Декоративные предметы",
+        condition: "Полностью отреставрировано",
         imageUrl: "https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
         isActive: true
       }
