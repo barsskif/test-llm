@@ -1,16 +1,12 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Plus, Edit, Trash2, Package, ShoppingBag, BarChart3 } from "lucide-react";
 import { ProductForm } from "./product-form";
 import { formatPrice, formatDate } from "@/lib/utils";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import type { Product, OrderWithItems } from "@shared/schema";
+import styles from "./admin-panel.module.css";
 
 export function AdminPanel() {
   const [activeTab, setActiveTab] = useState("products");
@@ -29,19 +25,23 @@ export function AdminPanel() {
 
   const deleteProductMutation = useMutation({
     mutationFn: async (id: number) => {
-      await apiRequest("DELETE", `/api/products/${id}`);
+      const response = await apiRequest("DELETE", `/api/products/${id}`);
+      if (!response.ok) {
+        throw new Error("Failed to delete product");
+      }
+      return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/products"] });
       toast({
         title: "Product deleted",
-        description: "The product has been removed from your catalog.",
+        description: "The product has been successfully deleted.",
       });
     },
     onError: () => {
       toast({
-        title: "Failed to delete product",
-        description: "Please try again later.",
+        title: "Error",
+        description: "Failed to delete product. Please try again.",
         variant: "destructive",
       });
     },
@@ -49,19 +49,23 @@ export function AdminPanel() {
 
   const updateOrderStatusMutation = useMutation({
     mutationFn: async ({ id, status }: { id: number; status: string }) => {
-      await apiRequest("PATCH", `/api/orders/${id}/status`, { status });
+      const response = await apiRequest("PATCH", `/api/orders/${id}`, { status });
+      if (!response.ok) {
+        throw new Error("Failed to update order status");
+      }
+      return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/orders"] });
       toast({
-        title: "Order status updated",
-        description: "The order status has been changed.",
+        title: "Order updated",
+        description: "Order status has been updated successfully.",
       });
     },
     onError: () => {
       toast({
-        title: "Failed to update order",
-        description: "Please try again later.",
+        title: "Error",
+        description: "Failed to update order status. Please try again.",
         variant: "destructive",
       });
     },
@@ -88,18 +92,18 @@ export function AdminPanel() {
     setEditingProduct(undefined);
   };
 
-  const getStatusBadgeVariant = (status: string) => {
+  const getBadgeClass = (status: string) => {
     switch (status) {
       case "pending":
-        return "default";
+        return styles.badgePending;
       case "processing":
-        return "secondary";
+        return styles.badgeProcessing;
       case "shipped":
-        return "outline";
+        return styles.badgeShipped;
       case "delivered":
-        return "default";
+        return styles.badgeDelivered;
       default:
-        return "default";
+        return styles.badgePending;
     }
   };
 
@@ -114,245 +118,181 @@ export function AdminPanel() {
 
   if (showProductForm) {
     return (
-      <div className="p-8">
+      <div className={styles.formContainer}>
         <ProductForm product={editingProduct} onClose={handleCloseForm} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-antique-white">
-      <div className="max-w-7xl mx-auto p-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-playfair font-bold text-dark-brown mb-2">Admin Panel</h1>
-          <p className="text-gray-600">Manage your antique marketplace</p>
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Админ панель</h1>
+          <p className={styles.subtitle}>Управление антикварным магазином</p>
         </div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 lg:w-auto lg:grid-cols-3">
-            <TabsTrigger value="products" className="flex items-center gap-2">
-              <Package className="w-4 h-4" />
-              Products
-            </TabsTrigger>
-            <TabsTrigger value="orders" className="flex items-center gap-2">
-              <ShoppingBag className="w-4 h-4" />
-              Orders
-            </TabsTrigger>
-            <TabsTrigger value="analytics" className="flex items-center gap-2">
-              <BarChart3 className="w-4 h-4" />
-              Analytics
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="products">
-            <Card>
-              <CardHeader>
-                <div className="flex justify-between items-center">
-                  <CardTitle className="font-playfair text-dark-brown">Product Management</CardTitle>
-                  <Button onClick={handleAddProduct} className="bg-goldenrod hover:bg-dark-goldenrod text-dark-brown">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add Product
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                {productsLoading ? (
-                  <div className="text-center py-8">Loading products...</div>
-                ) : (
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Product</TableHead>
-                        <TableHead>Category</TableHead>
-                        <TableHead>Price</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {products.map((product) => (
-                        <TableRow key={product.id}>
-                          <TableCell>
-                            <div className="flex items-center space-x-3">
-                              <img
-                                src={product.imageUrl}
-                                alt={product.name}
-                                className="w-10 h-10 rounded-lg object-cover"
-                              />
-                              <div>
-                                <div className="font-medium">{product.name}</div>
-                                <div className="text-sm text-gray-500">{product.condition}</div>
-                              </div>
-                            </div>
-                          </TableCell>
-                          <TableCell>{product.category}</TableCell>
-                          <TableCell className="font-medium">{formatPrice(product.price)}</TableCell>
-                          <TableCell>
-                            <Badge variant={product.isActive ? "default" : "secondary"}>
-                              {product.isActive ? "Active" : "Inactive"}
-                            </Badge>
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex space-x-2">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleEditProduct(product)}
-                              >
-                                <Edit className="w-4 h-4" />
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleDeleteProduct(product.id)}
-                                className="text-red-600 hover:text-red-700"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="orders">
-            <Card>
-              <CardHeader>
-                <CardTitle className="font-playfair text-dark-brown">Order Management</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {ordersLoading ? (
-                  <div className="text-center py-8">Loading orders...</div>
-                ) : orders.length === 0 ? (
-                  <div className="text-center py-8 text-gray-500">No orders yet</div>
-                ) : (
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Order ID</TableHead>
-                        <TableHead>Customer</TableHead>
-                        <TableHead>Total</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Date</TableHead>
-                        <TableHead>Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {orders.map((order) => (
-                        <TableRow key={order.id}>
-                          <TableCell className="font-medium">#{order.id}</TableCell>
-                          <TableCell>
-                            <div>
-                              <div className="font-medium">{order.customerName}</div>
-                              <div className="text-sm text-gray-500">{order.customerEmail}</div>
-                            </div>
-                          </TableCell>
-                          <TableCell className="font-medium">{formatPrice(order.total)}</TableCell>
-                          <TableCell>
-                            <Badge variant={getStatusBadgeVariant(order.status)}>
-                              {order.status}
-                            </Badge>
-                          </TableCell>
-                          <TableCell>{formatDate(order.createdAt)}</TableCell>
-                          <TableCell>
-                            <div className="flex space-x-2">
-                              {order.status === "pending" && (
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => updateOrderStatusMutation.mutate({ id: order.id, status: "processing" })}
-                                >
-                                  Process
-                                </Button>
-                              )}
-                              {order.status === "processing" && (
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => updateOrderStatusMutation.mutate({ id: order.id, status: "shipped" })}
-                                >
-                                  Ship
-                                </Button>
-                              )}
-                              {order.status === "shipped" && (
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => updateOrderStatusMutation.mutate({ id: order.id, status: "delivered" })}
-                                >
-                                  Delivered
-                                </Button>
-                              )}
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="analytics">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card>
-                <CardContent className="p-6">
-                  <div className="text-2xl font-bold text-chocolate">{formatPrice(totalRevenue)}</div>
-                  <div className="text-sm text-gray-500">Total Revenue</div>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="p-6">
-                  <div className="text-2xl font-bold text-chocolate">{totalProducts}</div>
-                  <div className="text-sm text-gray-500">Total Products</div>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="p-6">
-                  <div className="text-2xl font-bold text-chocolate">{thisMonthOrders}</div>
-                  <div className="text-sm text-gray-500">Orders This Month</div>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="p-6">
-                  <div className="text-2xl font-bold text-chocolate">{orders.length}</div>
-                  <div className="text-sm text-gray-500">Total Orders</div>
-                </CardContent>
-              </Card>
+        {/* Analytics Cards */}
+        <div className={styles.analyticsGrid}>
+          <div className={styles.analyticsCard}>
+            <div className={styles.analyticsHeader}>
+              <span className={styles.analyticsTitle}>Общая выручка</span>
+              <BarChart3 className={styles.analyticsIcon} />
             </div>
+            <div className={styles.analyticsValue}>{formatPrice(totalRevenue)}</div>
+          </div>
+          
+          <div className={styles.analyticsCard}>
+            <div className={styles.analyticsHeader}>
+              <span className={styles.analyticsTitle}>Всего товаров</span>
+              <Package className={styles.analyticsIcon} />
+            </div>
+            <div className={styles.analyticsValue}>{totalProducts}</div>
+          </div>
+          
+          <div className={styles.analyticsCard}>
+            <div className={styles.analyticsHeader}>
+              <span className={styles.analyticsTitle}>Заказы за месяц</span>
+              <ShoppingBag className={styles.analyticsIcon} />
+            </div>
+            <div className={styles.analyticsValue}>{thisMonthOrders}</div>
+          </div>
+        </div>
 
-            <Card className="mt-6">
-              <CardHeader>
-                <CardTitle className="font-playfair text-dark-brown">Recent Orders</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {orders.slice(0, 5).map((order) => (
-                  <div key={order.id} className="flex justify-between items-center py-3 border-b last:border-b-0">
-                    <div>
-                      <div className="font-medium">Order #{order.id}</div>
-                      <div className="text-sm text-gray-500">{order.customerName}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-medium">{formatPrice(order.total)}</div>
-                      <Badge variant={getStatusBadgeVariant(order.status)} className="text-xs">
-                        {order.status}
-                      </Badge>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+        {/* Tabs */}
+        <div className={styles.tabs}>
+          <div className={styles.tabsList}>
+            <button
+              className={`${styles.tabsTrigger} ${activeTab === "products" ? styles.active : ""}`}
+              onClick={() => setActiveTab("products")}
+            >
+              Товары
+            </button>
+            <button
+              className={`${styles.tabsTrigger} ${activeTab === "orders" ? styles.active : ""}`}
+              onClick={() => setActiveTab("orders")}
+            >
+              Заказы
+            </button>
+            <button
+              className={`${styles.tabsTrigger} ${activeTab === "analytics" ? styles.active : ""}`}
+              onClick={() => setActiveTab("analytics")}
+            >
+              Аналитика
+            </button>
+          </div>
+
+          {/* Products Tab */}
+          {activeTab === "products" && (
+            <div className={styles.tabsContent}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Управление товарами</h2>
+                <button onClick={handleAddProduct} className={styles.addButton}>
+                  <Plus className={styles.addIcon} />
+                  Добавить товар
+                </button>
+              </div>
+
+              <table className={styles.table}>
+                <thead className={styles.tableHeader}>
+                  <tr className={styles.tableRow}>
+                    <th className={styles.tableHead}>Изображение</th>
+                    <th className={styles.tableHead}>Название</th>
+                    <th className={styles.tableHead}>Цена</th>
+                    <th className={styles.tableHead}>Категория</th>
+                    <th className={styles.tableHead}>Действия</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.map((product) => (
+                    <tr key={product.id} className={styles.tableRow}>
+                      <td className={styles.tableCell}>
+                        <img
+                          src={product.imageUrl}
+                          alt={product.name}
+                          className={styles.productImage}
+                        />
+                      </td>
+                      <td className={styles.tableCell}>
+                        <div className={styles.productName}>{product.name}</div>
+                      </td>
+                      <td className={styles.tableCell}>
+                        <div className={styles.productPrice}>{formatPrice(product.price)}</div>
+                      </td>
+                      <td className={styles.tableCell}>{product.category}</td>
+                      <td className={styles.tableCell}>
+                        <div className={styles.actions}>
+                          <button
+                            onClick={() => handleEditProduct(product)}
+                            className={`${styles.actionButton} ${styles.editButton}`}
+                          >
+                            <Edit className={styles.actionIcon} />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteProduct(product.id)}
+                            className={`${styles.actionButton} ${styles.deleteButton}`}
+                          >
+                            <Trash2 className={styles.actionIcon} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Orders Tab */}
+          {activeTab === "orders" && (
+            <div className={styles.tabsContent}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Управление заказами</h2>
+              </div>
+
+              <table className={styles.table}>
+                <thead className={styles.tableHeader}>
+                  <tr className={styles.tableRow}>
+                    <th className={styles.tableHead}>ID</th>
+                    <th className={styles.tableHead}>Клиент</th>
+                    <th className={styles.tableHead}>Email</th>
+                    <th className={styles.tableHead}>Итого</th>
+                    <th className={styles.tableHead}>Статус</th>
+                    <th className={styles.tableHead}>Дата</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.map((order) => (
+                    <tr key={order.id} className={styles.tableRow}>
+                      <td className={styles.tableCell}>#{order.id}</td>
+                      <td className={styles.tableCell}>{order.customerName}</td>
+                      <td className={styles.tableCell}>{order.customerEmail}</td>
+                      <td className={styles.tableCell}>
+                        <div className={styles.orderTotal}>{formatPrice(order.total)}</div>
+                      </td>
+                      <td className={styles.tableCell}>
+                        <span className={`${styles.badge} ${getBadgeClass(order.status)}`}>
+                          {order.status}
+                        </span>
+                      </td>
+                      <td className={styles.tableCell}>{formatDate(order.createdAt)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Analytics Tab */}
+          {activeTab === "analytics" && (
+            <div className={styles.tabsContent}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Аналитика</h2>
+              </div>
+              <p>Раздел аналитики в разработке...</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
