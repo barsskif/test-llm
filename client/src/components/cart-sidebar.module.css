@@ -1,0 +1,306 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  max-width: 28rem;
+  background-color: var(--white);
+  box-shadow: var(--shadow-2xl);
+  z-index: 60;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-6);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--dark-brown);
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-2);
+  color: var(--gray-500);
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+  color: var(--gray-700);
+}
+
+.closeIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-6);
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--spacing-12) 0;
+}
+
+.emptyText {
+  color: var(--gray-600);
+  font-size: 1.125rem;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.item {
+  display: flex;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+}
+
+.itemImage {
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.itemDetails {
+  flex: 1;
+}
+
+.itemName {
+  font-weight: 600;
+  color: var(--dark-brown);
+  margin-bottom: var(--spacing-1);
+  font-size: 0.875rem;
+}
+
+.itemPrice {
+  color: var(--warm-gold);
+  font-weight: 700;
+  margin-bottom: var(--spacing-2);
+  font-size: 0.875rem;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.quantityButton {
+  background-color: var(--gray-100);
+  border: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.quantityButton:hover {
+  background-color: var(--gray-200);
+}
+
+.quantityButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity {
+  font-weight: 600;
+  min-width: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-1);
+  color: var(--red-500);
+  transition: color 0.3s ease;
+}
+
+.removeButton:hover {
+  color: var(--red-700);
+}
+
+.removeIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.checkoutSection {
+  border-top: 1px solid var(--gray-200);
+  padding: var(--spacing-6);
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dark-brown);
+  margin-bottom: var(--spacing-6);
+}
+
+.totalPrice {
+  color: var(--warm-gold);
+}
+
+.checkoutButton {
+  width: 100%;
+  background-color: var(--warm-gold);
+  color: var(--dark-brown);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-warm);
+}
+
+.checkoutButton:hover {
+  background-color: var(--deep-gold);
+  box-shadow: var(--shadow-warm-lg);
+  transform: translateY(-1px);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.label {
+  font-weight: 600;
+  color: var(--dark-brown);
+  font-size: 0.875rem;
+}
+
+.input {
+  padding: var(--spacing-3);
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--warm-gold);
+}
+
+.textarea {
+  padding: var(--spacing-3);
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  resize: vertical;
+  min-height: 4rem;
+  transition: border-color 0.3s ease;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--warm-gold);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: var(--spacing-3);
+}
+
+.submitButton {
+  flex: 1;
+  background-color: var(--warm-gold);
+  color: var(--dark-brown);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-warm);
+}
+
+.submitButton:hover {
+  background-color: var(--deep-gold);
+  box-shadow: var(--shadow-warm-lg);
+  transform: translateY(-1px);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cancelButton {
+  flex: 1;
+  background-color: var(--gray-100);
+  color: var(--gray-700);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: var(--gray-200);
+}

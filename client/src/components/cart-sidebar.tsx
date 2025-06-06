@@ -1,16 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Separator } from "@/components/ui/separator";
 import { X, Minus, Plus, Trash2 } from "lucide-react";
 import { useCart } from "@/hooks/use-cart";
 import { formatPrice } from "@/lib/utils";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import styles from "./cart-sidebar.module.css";
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -117,13 +112,17 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const total = getTotalPrice();
 
   return (
-    <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent className="w-full sm:max-w-md flex flex-col">
-        <SheetHeader>
-          <SheetTitle className="font-playfair text-dark-brown">
+    <>
+      {isOpen && <div className={`${styles.overlay} ${!isOpen ? styles.hidden : ''}`} onClick={onClose} />}
+      <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
+        <div className={styles.header}>
+          <h2 className={styles.title}>
             {showCheckout ? "Оформление заказа" : "Корзина покупок"}
-          </SheetTitle>
-        </SheetHeader>
+          </h2>
+          <button className={styles.closeButton} onClick={onClose}>
+            <X className={styles.closeIcon} />
+          </button>
+        </div>
 
         {!showCheckout ? (
           <>

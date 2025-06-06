@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { ProductCard } from "./product-card";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "lucide-react";
 import { useState, useMemo } from "react";
 import type { Product } from "@shared/schema";
+import styles from "./product-grid.module.css";
 
 export function ProductGrid() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -49,16 +48,16 @@ export function ProductGrid() {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className={styles.loadingGrid}>
         {[...Array(8)].map((_, i) => (
-          <div key={i} className="bg-white rounded-lg shadow-lg overflow-hidden animate-pulse">
-            <div className="w-full h-48 bg-gray-300"></div>
-            <div className="p-4">
-              <div className="h-4 bg-gray-300 rounded mb-2"></div>
-              <div className="h-3 bg-gray-300 rounded mb-3"></div>
-              <div className="flex justify-between items-center">
-                <div className="h-4 bg-gray-300 rounded w-16"></div>
-                <div className="h-8 bg-gray-300 rounded w-20"></div>
+          <div key={i} className={styles.loadingCard}>
+            <div className={styles.loadingImage}></div>
+            <div className={styles.loadingContent}>
+              <div className={styles.loadingTitle}></div>
+              <div className={styles.loadingDescription}></div>
+              <div className={styles.loadingFooter}>
+                <div className={styles.loadingPrice}></div>
+                <div className={styles.loadingButton}></div>
               </div>
             </div>
           </div>
@@ -68,55 +67,53 @@ export function ProductGrid() {
   }
 
   return (
-    <section id="catalog" className="py-16 bg-antique-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-4">
-          <h3 className="text-4xl font-playfair font-bold text-dark-brown">Наша Коллекция</h3>
+    <section id="catalog" className={styles.section}>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h3 className={styles.title}>Наша Коллекция</h3>
           
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full lg:w-auto">
-            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="border-warm-gold w-full sm:w-48">
-                <SelectValue placeholder="Все категории" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Все категории</SelectItem>
-                {categories.map(category => (
-                  <SelectItem key={category} value={category}>{category}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <div className={styles.controls}>
+            <select 
+              value={categoryFilter} 
+              onChange={(e) => setCategoryFilter(e.target.value)}
+              className={styles.select}
+            >
+              <option value="all">Все категории</option>
+              {categories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
             
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="border-warm-gold w-full sm:w-48">
-                <SelectValue placeholder="Сортировка" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="name">По названию</SelectItem>
-                <SelectItem value="price-low">Цена: По возрастанию</SelectItem>
-                <SelectItem value="price-high">Цена: По убыванию</SelectItem>
-                <SelectItem value="category">По категории</SelectItem>
-              </SelectContent>
-            </Select>
+            <select 
+              value={sortBy} 
+              onChange={(e) => setSortBy(e.target.value)}
+              className={styles.select}
+            >
+              <option value="name">По названию</option>
+              <option value="price-low">Цена: по возрастанию</option>
+              <option value="price-high">Цена: по убыванию</option>
+              <option value="category">По категории</option>
+            </select>
             
-            <div className="relative w-full sm:w-64">
-              <Input
+            <div className={styles.searchContainer}>
+              <input
                 type="text"
                 placeholder="Поиск товаров..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="border-warm-gold pr-10"
+                className={styles.searchInput}
               />
-              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-warm-gold w-4 h-4" />
+              <Search className={styles.searchIcon} />
             </div>
           </div>
         </div>
 
         {filteredAndSortedProducts.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-600 text-lg">Товары по вашим критериям не найдены.</p>
+          <div className={styles.emptyState}>
+            <p className={styles.emptyText}>Товары по вашим критериям не найдены.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className={styles.grid}>
             {filteredAndSortedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
