@@ -121,7 +121,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       <SheetContent className="w-full sm:max-w-md flex flex-col">
         <SheetHeader>
           <SheetTitle className="font-playfair text-dark-brown">
-            {showCheckout ? "Checkout" : "Shopping Cart"}
+            {showCheckout ? "Оформление заказа" : "Корзина покупок"}
           </SheetTitle>
         </SheetHeader>
 
@@ -129,7 +129,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
           <>
             <div className="flex-1 overflow-y-auto py-4">
               {items.length === 0 ? (
-                <p className="text-gray-500 text-center py-8">Your cart is empty</p>
+                <p className="text-gray-500 text-center py-8">Ваша корзина пуста</p>
               ) : (
                 <div className="space-y-4">
                   {items.map((item) => (
@@ -180,17 +180,17 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
             <div className="border-t pt-4">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-lg font-semibold text-dark-brown">Total:</span>
-                <span className="text-xl font-bold text-chocolate">
+                <span className="text-lg font-semibold text-dark-brown">Итого:</span>
+                <span className="text-xl font-bold text-warm-gold">
                   {formatPrice(total)}
                 </span>
               </div>
               <Button
                 onClick={handleCheckout}
                 disabled={items.length === 0}
-                className="w-full bg-goldenrod hover:bg-dark-goldenrod text-dark-brown font-semibold"
+                className="w-full bg-warm-gold hover:bg-deep-gold text-dark-brown font-semibold transition-all shadow-warm hover:shadow-warm-lg"
               >
-                Proceed to Checkout
+                Оформить заказ
               </Button>
             </div>
           </>
@@ -199,7 +199,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             <div className="flex-1 overflow-y-auto py-4">
               <form onSubmit={handleSubmitOrder} className="space-y-4">
                 <div>
-                  <Label htmlFor="customerName">Full Name *</Label>
+                  <Label htmlFor="customerName">Полное имя *</Label>
                   <Input
                     id="customerName"
                     value={formData.customerName}
@@ -220,7 +220,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 </div>
                 
                 <div>
-                  <Label htmlFor="customerPhone">Phone</Label>
+                  <Label htmlFor="customerPhone">Телефон</Label>
                   <Input
                     id="customerPhone"
                     type="tel"
@@ -230,7 +230,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 </div>
                 
                 <div>
-                  <Label htmlFor="shippingAddress">Shipping Address *</Label>
+                  <Label htmlFor="shippingAddress">Адрес доставки *</Label>
                   <Textarea
                     id="shippingAddress"
                     value={formData.shippingAddress}
@@ -243,7 +243,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 <Separator />
 
                 <div className="space-y-2">
-                  <h4 className="font-semibold">Order Summary</h4>
+                  <h4 className="font-semibold">Сводка заказа</h4>
                   {items.map((item) => (
                     <div key={item.product.id} className="flex justify-between text-sm">
                       <span>{item.product.name} x {item.quantity}</span>
@@ -252,7 +252,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   ))}
                   <Separator />
                   <div className="flex justify-between font-bold">
-                    <span>Total:</span>
+                    <span>Итого:</span>
                     <span>{formatPrice(total)}</span>
                   </div>
                 </div>
@@ -263,16 +263,16 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               <Button
                 onClick={handleSubmitOrder}
                 disabled={createOrderMutation.isPending}
-                className="w-full bg-goldenrod hover:bg-dark-goldenrod text-dark-brown font-semibold"
+                className="w-full bg-warm-gold hover:bg-deep-gold text-dark-brown font-semibold transition-all shadow-warm hover:shadow-warm-lg"
               >
-                {createOrderMutation.isPending ? "Processing..." : "Place Order"}
+                {createOrderMutation.isPending ? "Обработка..." : "Разместить заказ"}
               </Button>
               <Button
                 variant="outline"
                 onClick={() => setShowCheckout(false)}
                 className="w-full"
               >
-                Back to Cart
+                Назад в корзину
               </Button>
             </div>
           </>

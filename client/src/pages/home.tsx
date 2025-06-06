@@ -64,38 +64,38 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
-                <h4 className="text-xl font-playfair font-bold text-goldenrod mb-4">Heritage Treasures</h4>
-                <p className="text-sm">Preserving history through carefully restored antiques and vintage treasures.</p>
+                <h4 className="text-xl font-playfair font-bold text-warm-gold mb-4">Наследие Сокровищ</h4>
+                <p className="text-sm">Сохраняем историю через тщательно отреставрированный антиквариат и винтажные сокровища.</p>
               </div>
               <div>
-                <h5 className="font-semibold mb-4">Quick Links</h5>
+                <h5 className="font-semibold mb-4">Быстрые ссылки</h5>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="hover:text-goldenrod transition-colors">About Us</a></li>
-                  <li><a href="#catalog" className="hover:text-goldenrod transition-colors">Catalog</a></li>
-                  <li><a href="#" className="hover:text-goldenrod transition-colors">Restoration Services</a></li>
-                  <li><a href="#" className="hover:text-goldenrod transition-colors">Contact</a></li>
+                  <li><a href="#" className="hover:text-warm-gold transition-colors">О нас</a></li>
+                  <li><a href="#catalog" className="hover:text-warm-gold transition-colors">Каталог</a></li>
+                  <li><a href="#" className="hover:text-warm-gold transition-colors">Услуги реставрации</a></li>
+                  <li><a href="#" className="hover:text-warm-gold transition-colors">Контакты</a></li>
                 </ul>
               </div>
               <div>
-                <h5 className="font-semibold mb-4">Categories</h5>
+                <h5 className="font-semibold mb-4">Категории</h5>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="hover:text-goldenrod transition-colors">Furniture</a></li>
-                  <li><a href="#" className="hover:text-goldenrod transition-colors">Decorative Items</a></li>
-                  <li><a href="#" className="hover:text-goldenrod transition-colors">Jewelry</a></li>
-                  <li><a href="#" className="hover:text-goldenrod transition-colors">Books & Documents</a></li>
+                  <li><a href="#" className="hover:text-warm-gold transition-colors">Мебель</a></li>
+                  <li><a href="#" className="hover:text-warm-gold transition-colors">Декоративные предметы</a></li>
+                  <li><a href="#" className="hover:text-warm-gold transition-colors">Украшения</a></li>
+                  <li><a href="#" className="hover:text-warm-gold transition-colors">Книги и документы</a></li>
                 </ul>
               </div>
               <div>
-                <h5 className="font-semibold mb-4">Contact Info</h5>
+                <h5 className="font-semibold mb-4">Контактная информация</h5>
                 <div className="space-y-2 text-sm">
-                  <p>📞 +1 (555) 123-4567</p>
-                  <p>✉️ info@heritagetreasures.com</p>
-                  <p>📍 123 Antique St, Vintage City</p>
+                  <p>📞 +7 (495) 123-45-67</p>
+                  <p>✉️ info@nasledie-sokrovisch.ru</p>
+                  <p>📍 Москва, ул. Антикварная, 15</p>
                 </div>
               </div>
             </div>
             <div className="border-t border-vintage-brown mt-8 pt-8 text-center text-sm">
-              <p>&copy; 2024 Heritage Treasures. All rights reserved.</p>
+              <p>&copy; 2024 Наследие Сокровищ. Все права защищены.</p>
             </div>
           </div>
         </footer>
