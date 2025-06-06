@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ShoppingCart, Settings, Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
 import { CartSidebar } from "./cart-sidebar";
+import styles from "./navbar.module.css";
 
 export function Navbar() {
   const [location] = useLocation();
@@ -15,75 +15,71 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="bg-dark-brown text-antique-white sticky top-0 z-50 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
+      <nav className={styles.navbar}>
+        <div className={styles.container}>
+          <div className={styles.navContent}>
+            <div className={styles.logoSection}>
               <Link href="/">
-                <h1 className="text-2xl font-playfair font-bold text-warm-gold cursor-pointer">
+                <h1 className={styles.logo}>
                   Наследие Сокровищ
                 </h1>
               </Link>
             </div>
             
-            <div className="hidden md:flex items-center space-x-8">
+            <div className={styles.desktopMenu}>
               <Link href="/">
-                <a className={`hover:text-warm-gold transition-colors ${location === '/' ? 'text-warm-gold' : ''}`}>
+                <a className={`${styles.navLink} ${location === '/' ? styles.active : ''}`}>
                   Каталог
                 </a>
               </Link>
-              <a href="#about" className="hover:text-warm-gold transition-colors">О нас</a>
-              <a href="#contact" className="hover:text-warm-gold transition-colors">Контакты</a>
+              <a href="#about" className={styles.navLink}>О нас</a>
+              <a href="#contact" className={styles.navLink}>Контакты</a>
               <Link href="/admin">
-                <Button variant="ghost" className="hover:text-warm-gold transition-colors text-antique-white">
-                  <Settings className="w-4 h-4 mr-1" />
+                <button className={styles.adminButton}>
+                  <Settings className={styles.icon} />
                   Админ
-                </Button>
+                </button>
               </Link>
-              <Button
-                variant="ghost"
+              <button
                 onClick={() => setIsCartOpen(true)}
-                className="relative hover:text-warm-gold transition-colors text-antique-white"
+                className={styles.cartButton}
               >
-                <ShoppingCart className="w-5 h-5" />
+                <ShoppingCart className={styles.cartIcon} />
                 {totalItems > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-warm-gold text-dark-brown rounded-full w-5 h-5 text-xs flex items-center justify-center font-semibold">
+                  <span className={styles.cartBadge}>
                     {totalItems}
                   </span>
                 )}
-              </Button>
+              </button>
             </div>
             
-            <div className="md:hidden flex items-center">
-              <Button
-                variant="ghost"
+            <div className={styles.mobileMenuButton}>
+              <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-antique-white"
               >
-                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </Button>
+                {isMobileMenuOpen ? <X className={styles.mobileIcon} /> : <Menu className={styles.mobileIcon} />}
+              </button>
             </div>
           </div>
           
           {isMobileMenuOpen && (
-            <div className="md:hidden pb-4">
-              <div className="flex flex-col space-y-2">
+            <div className={styles.mobileMenu}>
+              <div className={styles.mobileMenuContent}>
                 <Link href="/">
-                  <a className="block py-2 hover:text-warm-gold transition-colors">Каталог</a>
+                  <a className={styles.mobileNavLink}>Каталог</a>
                 </Link>
-                <a href="#about" className="block py-2 hover:text-warm-gold transition-colors">О нас</a>
-                <a href="#contact" className="block py-2 hover:text-warm-gold transition-colors">Контакты</a>
+                <a href="#about" className={styles.mobileNavLink}>О нас</a>
+                <a href="#contact" className={styles.mobileNavLink}>Контакты</a>
                 <Link href="/admin">
-                  <a className="block py-2 hover:text-warm-gold transition-colors">Админ</a>
+                  <a className={styles.mobileNavLink}>Админ</a>
                 </Link>
-                <Button
-                  variant="ghost"
+                <button
                   onClick={() => setIsCartOpen(true)}
-                  className="flex items-center justify-start p-2 hover:text-warm-gold transition-colors text-antique-white"
+                  className={styles.mobileCartButton}
                 >
-                  <ShoppingCart className="w-5 h-5 mr-2" />
+                  <ShoppingCart className={styles.cartIcon} />
                   Корзина ({totalItems})
-                </Button>
+                </button>
               </div>
             </div>
           )}

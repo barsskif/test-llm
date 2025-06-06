@@ -1,9 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import type { Product } from "@shared/schema";
 import { useCart } from "@/hooks/use-cart";
 import { formatPrice } from "@/lib/utils";
 import { useState } from "react";
+import styles from "./product-card.module.css";
 
 interface ProductCardProps {
   product: Product;
@@ -24,36 +23,32 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+    <div className={styles.card}>
       <img 
         src={product.imageUrl} 
         alt={product.name}
-        className="w-full h-48 object-cover"
+        className={styles.image}
       />
-      <CardContent className="p-4">
-        <h4 className="text-lg font-playfair font-semibold text-dark-brown mb-2">
+      <div className={styles.content}>
+        <h4 className={styles.title}>
           {product.name}
         </h4>
-        <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+        <p className={styles.description}>
           {product.description}
         </p>
-        <div className="flex justify-between items-center">
-          <span className="text-xl font-bold text-chocolate">
+        <div className={styles.footer}>
+          <span className={styles.price}>
             {formatPrice(product.price)}
           </span>
-          <Button 
+          <button 
             onClick={handleAddToCart}
             disabled={isAdding}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-              isAdding 
-                ? 'bg-green-500 hover:bg-green-500 text-white' 
-                : 'bg-warm-gold hover:bg-deep-gold text-dark-brown shadow-warm hover:shadow-warm-lg'
-            }`}
+            className={`${styles.button} ${isAdding ? styles.added : ''}`}
           >
             {isAdding ? 'Добавлено!' : 'В корзину'}
-          </Button>
+          </button>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
