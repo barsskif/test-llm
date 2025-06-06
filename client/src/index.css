@@ -30,6 +30,8 @@
   --gray-900: #1a202c;
   --green-500: #48bb78;
   --red-500: #f56565;
+  --red-700: #c53030;
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
