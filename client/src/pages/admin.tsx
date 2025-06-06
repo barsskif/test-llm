@@ -1,7 +1,7 @@
 import { AdminPanel } from "@/components/admin-panel";
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import styles from "./admin.module.css";
 
 export default function Admin() {
   return (
