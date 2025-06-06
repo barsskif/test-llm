@@ -157,6 +157,7 @@ export class MemStorage implements IStorage {
       ...insertProduct,
       id,
       createdAt: new Date(),
+      isActive: insertProduct.isActive ?? true,
     };
     this.products.set(id, product);
     return product;
@@ -204,6 +205,8 @@ export class MemStorage implements IStorage {
       ...insertOrder,
       id: orderId,
       createdAt: new Date(),
+      customerPhone: insertOrder.customerPhone || null,
+      status: "pending",
     };
     this.orders.set(orderId, order);
 

@@ -1,39 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
-
 :root {
-  --background: 36 26% 97%; /* #FAEBD7 - antique white */
+  --background: 35 40% 96%; /* #F8F4F0 - warm antique white */
   --foreground: 25 50% 11%; /* #2F1B14 - dark brown */
-  --muted: 39 23% 93%; /* #F5F5DC - vintage beige */
+  --muted: 35 30% 92%; /* #F2EDE6 - warm beige */
   --muted-foreground: 25 5.3% 44.7%;
-  --popover: 0 0% 100%;
+  --popover: 35 40% 98%;
   --popover-foreground: 25 50% 11%;
-  --card: 0 0% 100%;
+  --card: 35 40% 98%;
   --card-foreground: 25 50% 11%;
-  --border: 25 18% 80%;
-  --input: 25 18% 80%;
-  --primary: 43 74% 49%; /* #DAA520 - goldenrod */
+  --border: 35 20% 85%;
+  --input: 35 20% 85%;
+  --primary: 35 70% 55%; /* #D4A574 - warm gold */
   --primary-foreground: 25 50% 11%;
-  --secondary: 39 23% 93%;
+  --secondary: 35 30% 92%;
   --secondary-foreground: 25 50% 11%;
-  --accent: 39 23% 93%;
+  --accent: 35 30% 92%;
   --accent-foreground: 25 50% 11%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 60 9.1% 97.8%;
   --ring: 25 50% 11%;
-  --radius: 0.5rem;
+  --radius: 0.75rem;
   
-  /* Custom vintage colors */
-  --vintage-brown: 25 69% 27%; /* #8B4513 */
-  --chocolate: 16 72% 47%; /* #D2691E */
-  --goldenrod: 43 74% 49%; /* #DAA520 */
-  --dark-goldenrod: 43 74% 39%; /* #B8860B */
-  --antique-white: 36 26% 97%; /* #FAEBD7 */
-  --vintage-beige: 39 23% 93%; /* #F5F5DC */
+  /* Custom warm vintage colors */
+  --vintage-brown: 20 60% 30%; /* #8B5A3C */
+  --chocolate: 16 65% 50%; /* #CC7722 */
+  --warm-gold: 35 70% 55%; /* #D4A574 */
+  --deep-gold: 35 70% 45%; /* #B8935F */
+  --antique-white: 35 40% 96%; /* #F8F4F0 */
+  --vintage-beige: 35 30% 92%; /* #F2EDE6 */
   --dark-brown: 25 50% 11%; /* #2F1B14 */
+  --copper: 20 85% 45%; /* #CD853F */
+  --bronze: 30 60% 40%; /* #B8860B */
 }
 
 .dark {
@@ -93,12 +95,20 @@
     color: hsl(var(--chocolate));
   }
   
-  .text-goldenrod {
-    color: hsl(var(--goldenrod));
+  .text-warm-gold {
+    color: hsl(var(--warm-gold));
   }
   
-  .text-dark-goldenrod {
-    color: hsl(var(--dark-goldenrod));
+  .text-deep-gold {
+    color: hsl(var(--deep-gold));
+  }
+  
+  .text-copper {
+    color: hsl(var(--copper));
+  }
+  
+  .text-bronze {
+    color: hsl(var(--bronze));
   }
   
   .text-antique-white {
@@ -121,12 +131,20 @@
     background-color: hsl(var(--chocolate));
   }
   
-  .bg-goldenrod {
-    background-color: hsl(var(--goldenrod));
+  .bg-warm-gold {
+    background-color: hsl(var(--warm-gold));
   }
   
-  .bg-dark-goldenrod {
-    background-color: hsl(var(--dark-goldenrod));
+  .bg-deep-gold {
+    background-color: hsl(var(--deep-gold));
+  }
+  
+  .bg-copper {
+    background-color: hsl(var(--copper));
+  }
+  
+  .bg-bronze {
+    background-color: hsl(var(--bronze));
   }
   
   .bg-antique-white {
@@ -145,15 +163,29 @@
     border-color: hsl(var(--chocolate));
   }
   
-  .border-goldenrod {
-    border-color: hsl(var(--goldenrod));
+  .border-warm-gold {
+    border-color: hsl(var(--warm-gold));
   }
   
-  .hover\:bg-dark-goldenrod:hover {
-    background-color: hsl(var(--dark-goldenrod));
+  .hover\:bg-deep-gold:hover {
+    background-color: hsl(var(--deep-gold));
   }
   
-  .hover\:text-goldenrod:hover {
-    color: hsl(var(--goldenrod));
+  .hover\:text-warm-gold:hover {
+    color: hsl(var(--warm-gold));
+  }
+  
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  .shadow-warm {
+    box-shadow: 0 4px 6px -1px rgba(212, 165, 116, 0.1), 0 2px 4px -1px rgba(212, 165, 116, 0.06);
+  }
+  
+  .hover\:shadow-warm-lg:hover {
+    box-shadow: 0 10px 15px -3px rgba(212, 165, 116, 0.15), 0 4px 6px -2px rgba(212, 165, 116, 0.1);
   }
 }
